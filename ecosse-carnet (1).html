@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Écosse — Avril 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --paper: #f2ead8;
+  --paper-dark: #e8ddc4;
+  --paper-darker: #ddd0b4;
+  --ink: #2c2416;
+  --ink-faded: #6b5d47;
+  --ink-light: #9c8e78;
+  --red: #c0392b;
+  --red-soft: #d4614f;
+  --blue-stamp: #2c4a6e;
+  --green-faded: #4a6741;
+  --tape: rgba(200,185,150,0.45);
+}
+
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .page { page-break-after: always; }
+  body { background: var(--paper) !important; }
+}
+
+body {
+  background: #c8bfa8;
+  font-family: 'Crimson Pro', Georgia, serif;
+  color: var(--ink);
+  font-size: 16px;
+}
+
+/* ── NOISE TEXTURE overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ── PAGE ── */
+.page {
+  max-width: 780px;
+  margin: 2rem auto;
+  background: var(--paper);
+  min-height: 297mm;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.25), 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* paper texture via repeating lines */
+.page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    rgba(160,140,100,0.08) 27px,
+    rgba(160,140,100,0.08) 28px
+  );
+  z-index: 0;
+}
+
+.page > * { position: relative; z-index: 1; }
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 3.5rem;
+  background: var(--paper);
+  position: relative;
+}
+
+.cover-top-strip {
+  background: var(--ink);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 8px;
+}
+
+.cover-stamp {
+  position: absolute;
+  top: 3rem;
+  right: 3.5rem;
+  border: 2.5px solid var(--blue-stamp);
+  padding: 0.6rem 0.8rem;
+  text-align: center;
+  transform: rotate(3deg);
+  opacity: 0.7;
+}
+.cover-stamp-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-stamp);
+  display: block;
+  line-height: 1.6;
+}
+.cover-stamp-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--blue-stamp);
+  display: block;
+  border-top: 1px solid var(--blue-stamp);
+  margin-top: 0.3rem;
+  padding-top: 0.3rem;
+}
+
+.cover-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 3.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.cover-title {
+  font-family: 'Caveat', cursive;
+  font-size: 7rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 0.9;
+  margin-bottom: 0.5rem;
+  letter-spacing: -2px;
+}
+
+.cover-subtitle {
+  font-family: 'Caveat', cursive;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--ink-faded);
+  margin-bottom: 2.5rem;
+}
+
+/* big photo area on cover */
+.cover-photo-area {
+  flex: 1;
+  position: relative;
+  margin: 0 -3.5rem;
+  overflow: hidden;
+  min-height: 380px;
+  background: var(--paper-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-photo-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: sepia(15%) contrast(0.95);
+}
+
+.cover-photo-placeholder {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  color: var(--ink-light);
+  text-align: center;
+  padding: 3rem;
+  border: 2px dashed var(--paper-darker);
+}
+
+/* tape strips on photo */
+.tape-h {
+  position: absolute;
+  left: 0; right: 0;
+  height: 28px;
+  background: var(--tape);
+  backdrop-filter: blur(0px);
+}
+.tape-h.top { top: 0; }
+.tape-h.bottom { bottom: 0; }
+
+.cover-bottom {
+  padding: 1.5rem 3.5rem 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.cover-route {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ink-light);
+  line-height: 2;
+}
+
+.cover-nights {
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  color: var(--ink-faded);
+  text-align: right;
+}
+
+/* ── OVERVIEW PAGE ── */
+.overview-page {
+  padding: 3rem 3.5rem;
+  min-height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1.5px solid var(--paper-darker);
+}
+
+.page-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-light);
+  letter-spacing: 0.2em;
+}
+
+.page-title-hand {
+  font-family: 'Caveat', cursive;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* summary list */
+.summary-list {
+  list-style: none;
+  margin-bottom: 2.5rem;
+}
+
+.summary-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px dashed rgba(160,140,100,0.3);
+  align-items: baseline;
+}
+
+.summary-day {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+}
+
+.summary-content {}
+
+.summary-title {
+  font-family: 'Caveat', cursive;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+}
+
+.summary-note {
+  font-size: 13px;
+  color: var(--ink-faded);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* practical box */
+.prac-box {
+  background: var(--paper-dark);
+  border: 1px solid var(--paper-darker);
+  padding: 1.5rem;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.prac-box::before {
+  content: '⚑ avant de partir';
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--red-soft);
+  position: absolute;
+  top: -0.7rem;
+  left: 1rem;
+  background: var(--paper-dark);
+  padding: 0 0.4rem;
+}
+
+.prac-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.prac-item-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 0.3rem;
+}
+
+.prac-item-text {
+  font-size: 13px;
+  color: var(--ink-faded);
+  line-height: 1.55;
+}
+
+/* ── DAY PAGES ── */
+.day-page {
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* color stripe top */
+.day-stripe {
+  height: 6px;
+  background: var(--ink);
+}
+.day-stripe.j1 { background: #6b8f71; }
+.day-stripe.j2 { background: #7a6b52; }
+.day-stripe.j3 { background: #4a6b8a; }
+.day-stripe.j4 { background: #8a6b4a; }
+.day-stripe.j5 { background: #6b5a7a; }
+.day-stripe.j6 { background: #c0392b; }
+
+.day-header {
+  padding: 2rem 3.5rem 1.5rem;
+  border-bottom: 1px dashed rgba(160,140,100,0.3);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.day-header-left {}
+
+.day-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.3em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.day-title-big {
+  font-family: 'Caveat', cursive;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.day-route-line {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+}
+
+.day-drive-badge {
+  background: var(--paper-dark);
+  border: 1px solid var(--paper-darker);
+  padding: 0.6rem 1rem;
+  text-align: center;
+  flex-shrink: 0;
+  transform: rotate(-1.5deg);
+}
+
+.drive-time {
+  font-family: 'Caveat', cursive;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  line-height: 1;
+}
+
+.drive-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+}
+
+.day-body {
+  padding: 1.5rem 3.5rem 2rem;
+  flex: 1;
+}
+
+/* ── STOPS ── */
+.stop {
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 0 1.2rem;
+}
+
+.stop-left {
+  text-align: right;
+  padding-top: 3px;
+}
+
+.stop-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.stop-dot-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+  margin-right: -1px;
+}
+
+.stop-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink-faded);
+  background: var(--paper);
+}
+
+.stop:not(:last-child) .stop-left::after {
+  content: '';
+  display: block;
+  width: 1px;
+  background: rgba(160,140,100,0.35);
+  height: calc(100% - 20px);
+  margin: 4px auto 0;
+  margin-right: 0;
+  float: right;
+  margin-top: 6px;
+}
+
+.stop-right {}
+
+.stop-name {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+
+.castle-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red-soft);
+  border: 1px solid var(--red-soft);
+  padding: 1px 5px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  transform: translateY(-2px);
+  display: inline-block;
+}
+
+.stop-desc {
+  font-size: 14px;
+  color: var(--ink-faded);
+  line-height: 1.7;
+  margin-bottom: 0.7rem;
+}
+
+/* handwritten note / tip */
+.note {
+  margin-top: 0.6rem;
+  padding: 0.6rem 0.8rem 0.6rem 1rem;
+  border-left: 2px solid var(--paper-darker);
+  position: relative;
+}
+
+.note::before {
+  content: '✎';
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  position: absolute;
+  left: -0.65rem;
+  top: 0.5rem;
+  background: var(--paper);
+  line-height: 1;
+}
+
+.note-text {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--ink-faded);
+  line-height: 1.5;
+}
+
+/* polaroid photo */
+.polaroid-wrap {
+  margin: 0.8rem 0 0.5rem;
+}
+
+.polaroid {
+  background: white;
+  padding: 8px 8px 28px;
+  box-shadow: 2px 3px 12px rgba(0,0,0,0.12);
+  display: inline-block;
+  max-width: 100%;
+}
+
+.polaroid.tilt-l { transform: rotate(-2deg); }
+.polaroid.tilt-r { transform: rotate(1.5deg); }
+.polaroid.tilt-ll { transform: rotate(-3.5deg); }
+
+.polaroid img {
+  width: 100%;
+  max-width: 340px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  filter: sepia(10%) contrast(0.97);
+}
+
+.polaroid-caption {
+  font-family: 'Caveat', cursive;
+  font-size: 0.95rem;
+  color: #666;
+  text-align: center;
+  padding-top: 4px;
+}
+
+.polaroid-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+
+.polaroid-row .polaroid img {
+  width: 200px;
+  height: 150px;
+}
+
+/* photo placeholder */
+.photo-placeholder {
+  background: var(--paper-dark);
+  border: 2px dashed var(--paper-darker);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Caveat', cursive;
+  color: var(--ink-light);
+  font-size: 1rem;
+}
+
+/* ── WASHI TAPE decoration ── */
+.washi {
+  position: absolute;
+  height: 18px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(180,160,100,0.3) 0px,
+    rgba(180,160,100,0.15) 4px,
+    rgba(180,160,100,0.3) 8px
+  );
+}
+
+/* ── SEPARATOR ── */
+.sep {
+  text-align: center;
+  color: var(--ink-light);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  margin: 1.5rem 0;
+  opacity: 0.5;
+}
+
+/* ── DRIVE LINE ── */
+.drive-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+}
+
+.drive-line::before,
+.drive-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(160,140,100,0.3);
+  border-top: 1px dashed rgba(160,140,100,0.4);
+}
+
+/* ── CORNER FOLD ── */
+.page::before {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 0 28px 28px;
+  border-color: transparent transparent #c8bfa8 transparent;
+  z-index: 10;
+}
+
+/* ── STICKER / BADGE ── */
+.sticker {
+  display: inline-block;
+  font-family: 'Caveat', cursive;
+  font-size: 0.85rem;
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.sticker-red { background: rgba(192,57,43,0.12); color: var(--red); border: 1px solid rgba(192,57,43,0.25); }
+.sticker-green { background: rgba(74,103,65,0.12); color: var(--green-faded); border: 1px solid rgba(74,103,65,0.25); }
+.sticker-blue { background: rgba(44,74,110,0.1); color: var(--blue-stamp); border: 1px solid rgba(44,74,110,0.2); }
+
+/* ── BACK COVER ── */
+.back-cover {
+  min-height: 60vh;
+  padding: 4rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--paper);
+}
+
+.back-big {
+  font-family: 'Caveat', cursive;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin: 1rem 0 0.5rem;
+}
+
+.back-sub {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink-faded);
+  margin-bottom: 2rem;
+}
+
+.back-dots {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-top-strip"></div>
+
+    <div class="cover-stamp">
+      <span class="cover-stamp-text">Carnet de<br>Voyage</span>
+      <span class="cover-stamp-date">Avril 2026</span>
+    </div>
+
+    <p class="cover-tag">— road trip —</p>
+    <h1 class="cover-title">Écosse</h1>
+    <p class="cover-subtitle">Highlands & Édimbourg</p>
+  </div>
+
+  <div class="cover-photo-area">
+    <div class="tape-h top"></div>
+    <!-- REMPLACER src par ta photo de couverture -->
+    <img src="https://images.unsplash.com/photo-1667580638875-bf6674958f9c?q=80&w=1332&auto=format&fit=crop"
+         alt="Glencoe"
+         onerror="this.outerHTML='<div class=\'cover-photo-placeholder\' style=\'width:100%;height:380px;display:flex;align-items:center;justify-content:center;\'>📷 ta photo ici</div>'">
+    <div class="tape-h bottom"></div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-route">
+      EDI → Stirling → Glencoe<br>
+      → Castle Stalker → Eilean Donan<br>
+      → Skye → Inverness → Édimbourg
+    </div>
+    <div class="cover-nights">
+      6 jours<br>
+      <span style="font-size:1rem; color:var(--ink-light);">23 – 29 avril 2026</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ OVERVIEW ══════════ -->
+<div class="page">
+  <div class="overview-page">
+    <div class="page-header">
+      <span class="page-num">— vue d'ensemble —</span>
+      <h2 class="page-title-hand">Le programme</h2>
+    </div>
+
+    <ul class="summary-list">
+      <li class="summary-item">
+        <div class="summary-day">J1 · jeu 23</div>
+        <div class="summary-content">
+          <span class="summary-title">Arrivée · Stirling · Glencoe</span>
+          <span class="summary-note">Vol 11h30 · château de Stirling · nuit dans la vallée · ~2h45 de route</span>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-day">J2 · ven 24</div>
+        <div class="summary-content">
+          <span class="summary-title">Castle Stalker · Eilean Donan · Skye</span>
+          <span class="summary-note">Deux châteaux sur l'eau · arrivée à Portree · ~3h45 de route</span>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-day">J3 · sam 25</div>
+        <div class="summary-content">
+          <span class="summary-title">Journée Skye</span>
+          <span class="summary-note">Fairy Pools · Old Man of Storr · Quiraing · ~2h45 de boucle</span>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-day">J4 · dim 26</div>
+        <div class="summary-content">
+          <span class="summary-title">Skye → Inverness</span>
+          <span class="summary-note">Journée tranquille · 2h de route · ville à pied l'après-midi</span>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-day">J5 · lun 27</div>
+        <div class="summary-content">
+          <span class="summary-title">Blair Castle · Pitlochry · Édimbourg</span>
+          <span class="summary-note">Descente vers le sud · arrivée à midi · ~4h15 de route</span>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-day">J6 · mar 28</div>
+        <div class="summary-content">
+          <span class="summary-title">Édimbourg — journée entière</span>
+          <span class="summary-note">Château · Royal Mile · Arthur's Seat · vol 6h35 le 30 avril</span>
+        </div>
+      </li>
+    </ul>
+
+    <div class="prac-box">
+      <div class="prac-grid">
+        <div>
+          <p class="prac-item-label">🚗 voiture</p>
+          <p class="prac-item-text">SIXT à l'aéroport EDI. Conduite à gauche — prévoir 1h d'adaptation. Rester côté centre de la route dans les ronds-points.</p>
+        </div>
+        <div>
+          <p class="prac-item-label">🌦 météo avril</p>
+          <p class="prac-item-text">5–14°C, vent et pluie possibles n'importe quand. Imperméable indispensable, chaussures waterproof pour les balades.</p>
+        </div>
+        <div>
+          <p class="prac-item-label">💷 pratique</p>
+          <p class="prac-item-text">Carte acceptée partout. Réserver Stirling, Eilean Donan, Blair Castle et Édimbourg en ligne à l'avance.</p>
+        </div>
+        <div>
+          <p class="prac-item-label">📱 réseau</p>
+          <p class="prac-item-text">Très limité dans les Highlands et sur Skye. Télécharger Google Maps hors-ligne avant de partir.</p>
+        </div>
+        <div>
+          <p class="prac-item-label">✈ vol retour</p>
+          <p class="prac-item-text">Départ 6h35 le 30. Nuit Premier Inn Airport conseillée le 29 au soir.</p>
+        </div>
+        <div>
+          <p class="prac-item-label">🛣 routes</p>
+          <p class="prac-item-text">Single-track roads sur Skye — s'arrêter dans les "passing places" pour laisser passer. Pas de dépassement en force.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ J1 ══════════ -->
+<div class="page">
+  <div class="day-page">
+    <div class="day-stripe j1"></div>
+    <div class="day-header">
+      <div class="day-header-left">
+        <p class="day-label">Jour 1 · Jeudi 23 Avril</p>
+        <h2 class="day-title-big">Arrivée → Glencoe</h2>
+        <p class="day-route-line">EDI · Stirling · Glencoe</p>
+      </div>
+      <div class="day-drive-badge">
+        <span class="drive-time">~2h45</span>
+        <span class="drive-label">route totale</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">11h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Aéroport d'Édimbourg</h3>
+          <p class="stop-desc">Atterrissage. SIXT est dans le terminal ou juste à côté. Prévoir 30–45 min pour récupérer la voiture.</p>
+          <div class="note">
+            <p class="note-text">Conduite à gauche — les ronds-points sont le moment le plus trompeur. Pas de stress, ça vient vite !</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">45 min · M9</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">13h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Château de Stirling <span class="castle-tag">château</span></h3>
+          <p class="stop-desc">Perché sur son rocher, c'est ici que Marie Reine des Écossais fut couronnée enfant. Vues splendides sur les Highlands au nord. Compter 1h30 de visite.</p>
+          <div class="polaroid-wrap">
+            <!-- REMPLACER src par ta photo de Stirling -->
+            <div class="polaroid tilt-l">
+              <img src="https://images.unsplash.com/photo-1600114654525-1f3cbd5fece2?q=80&w=1331&auto=format&fit=crop" style="width:300px;height:190px;object-fit:cover;display:block;" alt="Stirling Castle">
+              <p class="polaroid-caption">Stirling Castle</p>
+            </div>
+          </div>
+          <div class="note">
+            <p class="note-text">Café à l'intérieur pour déjeuner rapidement avant de reprendre la route vers Glencoe.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">1h30 · A85 → A82</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">17h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot" style="background:var(--ink-faded);"></div></div>
+        </div>
+        <div class="stop-right">
+          <span class="sticker sticker-green">🏡 nuit</span>
+          <h3 class="stop-name">Glencoe</h3>
+          <p class="stop-desc">L'entrée dans la vallée par la A82 est un des moments les plus saisissants du voyage. Rouler doucement, s'arrêter souvent. La lumière de fin d'après-midi en avril est dorée.</p>
+          <div class="note">
+            <p class="note-text">Ballachulish Hotel ou un B&B dans le village. Les Trois Sœurs s'illuminent en orange au coucher du soleil — ne pas rater ça.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ J2 ══════════ -->
+<div class="page">
+  <div class="day-page">
+    <div class="day-stripe j2"></div>
+    <div class="day-header">
+      <div class="day-header-left">
+        <p class="day-label">Jour 2 · Vendredi 24 Avril</p>
+        <h2 class="day-title-big">Châteaux sur l'eau</h2>
+        <p class="day-route-line">Glencoe · Castle Stalker · Eilean Donan · Portree</p>
+      </div>
+      <div class="day-drive-badge">
+        <span class="drive-time">~3h45</span>
+        <span class="drive-label">route totale</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">9h00</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Glencoe — matin tranquille</h3>
+          <p class="stop-desc">Balade courte depuis le parking Signal Rock (30 min) avant de partir. Les cascades sont au maximum fin avril.</p>
+          <div class="note">
+            <p class="note-text">Lumière rasante le matin sur les falaises — le brouillard qui se lève sur les crêtes vaut toutes les photos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">45 min · A82 → A828</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">10h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Castle Stalker <span class="castle-tag">château</span></h3>
+          <p class="stop-desc">Ce petit château du XVe siècle sur son îlot dans le Loch Laich est un stop photo parfait — 10 minutes depuis la route, vue imprenable. On ne rentre pas dedans, mais l'extérieur est splendide.</p>
+          <div class="polaroid-wrap">
+            <div class="polaroid tilt-r">
+              <img src="https://images.unsplash.com/photo-1591083262741-9c9cbc4b82be?q=80&w=1170&auto=format&fit=crop" style="width:300px;height:190px;object-fit:cover;display:block;" alt="Castle Stalker">
+              <p class="polaroid-caption">Castle Stalker</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">1h15 · A828 → A87</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">12h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Eilean Donan Castle <span class="castle-tag">château</span></h3>
+          <p class="stop-desc">Le château le plus photographié d'Écosse. Sur un îlot au confluent de trois lochs, relié par un pont de pierre. XIIIe siècle, détruit, reconstruit. Ouvert 10h–15h, ~£9.</p>
+          <div class="polaroid-wrap">
+            <div class="polaroid tilt-ll">
+              <img src="https://images.unsplash.com/photo-1649980561137-733cc5f9259e?q=80&w=687&auto=format&fit=crop" style="width:300px;height:190px;object-fit:cover;display:block;" alt="Eilean Donan Castle">
+              <p class="polaroid-caption">Eilean Donan Castle</p>
+            </div>
+          </div>
+          <div class="note">
+            <p class="note-text">À marée basse, le reflet dans l'eau est magique. App "Tides Near Me" pour vérifier avant.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">1h · A87 → Pont de Skye</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">16h00</span>
+          <div class="stop-dot-wrap"><div class="stop-dot" style="background:var(--ink-faded);"></div></div>
+        </div>
+        <div class="stop-right">
+          <span class="sticker sticker-green">🏡 2 nuits</span>
+          <h3 class="stop-name">Portree, Île de Skye</h3>
+          <p class="stop-desc">Le petit port coloré, capitale de l'île. Dîner au bord du port — les fish & chips de Portree sont légendaires.</p>
+          <div class="note">
+            <p class="note-text">The Bosville Hotel ou B&B. Réserver impérativement — Portree est très demandé en avril.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ J3 ══════════ -->
+<div class="page">
+  <div class="day-page">
+    <div class="day-stripe j3"></div>
+    <div class="day-header">
+      <div class="day-header-left">
+        <p class="day-label">Jour 3 · Samedi 25 Avril</p>
+        <h2 class="day-title-big">L'Île de Skye</h2>
+        <p class="day-route-line">Fairy Pools · Old Man of Storr · Quiraing</p>
+      </div>
+      <div class="day-drive-badge">
+        <span class="drive-time">~2h45</span>
+        <span class="drive-label">boucle depuis Portree</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">8h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Fairy Pools</h3>
+          <p class="stop-desc">Piscines naturelles turquoise au pied des Cuillin. Sentier plat, 5 km A/R, 1h30. Le cadre avec les montagnes en fond est spectaculaire.</p>
+          <div class="polaroid-wrap">
+            <div class="polaroid tilt-r">
+              <img src="https://images.unsplash.com/photo-1698937612554-bdc512cbe402?q=80&w=1170&auto=format&fit=crop" style="width:300px;height:190px;object-fit:cover;display:block;" alt="Fairy Pools">
+              <p class="polaroid-caption">Fairy Pools</p>
+            </div>
+          </div>
+          <div class="note">
+            <p class="note-text">Partir de Portree à 8h30 pour avoir les pools presque pour soi. Parking payant ~£5, se remplit vite.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">45 min · A863 → A87</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">12h00</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Old Man of Storr</h3>
+          <p class="stop-desc">Monolithe de basalte de 50m, symbole de Skye. Montée 45 min, dénivelé ~300m, sentier balisé. Panorama sur toute la côte est depuis le haut.</p>
+          <div class="note">
+            <p class="note-text">Chaussures imperméables indispensables — le sentier est boueux en avril. Parking payant à la base.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">25 min · A855</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">15h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Quiraing</h3>
+          <p class="stop-desc">Plateau disloqué de falaises et d'aiguilles — paysage lunaire absolument unique. La route qui y mène est déjà un spectacle. 30 min de balade facile depuis le parking suffit.</p>
+          <div class="polaroid-wrap">
+            <div class="polaroid tilt-l">
+              <img src="https://images.unsplash.com/photo-1691201200747-bf8b5ebc4030?q=80&w=1170&auto=format&fit=crop" style="width:300px;height:190px;object-fit:cover;display:block;" alt="Quiraing">
+              <p class="polaroid-caption">Le Quiraing</p>
+            </div>
+          </div>
+          <div class="note">
+            <p class="note-text">Lumière du soir rasante sur les falaises — le Quiraing en fin d'après-midi, c'est quelque chose.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ J4 ══════════ -->
+<div class="page">
+  <div class="day-page">
+    <div class="day-stripe j4"></div>
+    <div class="day-header">
+      <div class="day-header-left">
+        <p class="day-label">Jour 4 · Dimanche 26 Avril</p>
+        <h2 class="day-title-big">Skye → Inverness</h2>
+        <p class="day-route-line">Portree · A87 · Inverness</p>
+      </div>
+      <div class="day-drive-badge">
+        <span class="drive-time">~2h</span>
+        <span class="drive-label">journée légère</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">9h00</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Dernier matin à Portree</h3>
+          <p class="stop-desc">Café au port avant de quitter l'île. La route de retour par la A87 longe de beaux lochs — s'arrêter côté continental du pont de Skye pour une photo sur le détroit.</p>
+        </div>
+      </div>
+
+      <div class="drive-line">2h · A87 → A82 → A9</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">11h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Inverness — arrivée</h3>
+          <p class="stop-desc">Capitale des Highlands, ville agréable et compacte. Après-midi libre pour flâner au bord de la rivière Ness, voir le château rose, explorer le centre.</p>
+          <div class="polaroid-wrap">
+            <div class="polaroid tilt-r">
+              <img src="https://images.unsplash.com/photo-1718348635822-97e2d2c33987?q=80&w=1169&auto=format&fit=crop" style="width:300px;height:190px;object-fit:cover;display:block;" alt="Inverness">
+              <p class="polaroid-caption">Inverness &amp; la rivière Ness</p>
+            </div>
+          </div>
+          <div class="note">
+            <p class="note-text">Journée volontairement légère après l'intensité de Skye. Se reposer, se promener, bien manger. Johnny Foxes pub au bord de la rivière pour le soir.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">—</span>
+          <div class="stop-dot-wrap"><div class="stop-dot" style="background:var(--ink-faded);"></div></div>
+        </div>
+        <div class="stop-right">
+          <span class="sticker sticker-green">🏡 nuit</span>
+          <h3 class="stop-name">Nuit à Inverness</h3>
+          <div class="note">
+            <p class="note-text">Inverness City Hotel ou Heathmount Hotel sont bien situés. Bonne nuit avant la grande descente vers Édimbourg demain.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ J5 ══════════ -->
+<div class="page">
+  <div class="day-page">
+    <div class="day-stripe j5"></div>
+    <div class="day-header">
+      <div class="day-header-left">
+        <p class="day-label">Jour 5 · Lundi 27 Avril</p>
+        <h2 class="day-title-big">Descente vers Édimbourg</h2>
+        <p class="day-route-line">Inverness · Blair Castle · Pitlochry · Édimbourg</p>
+      </div>
+      <div class="day-drive-badge">
+        <span class="drive-time">~4h15</span>
+        <span class="drive-label">route totale</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">9h00</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Départ d'Inverness</h3>
+          <p class="stop-desc">Route A9 vers le sud à travers le Perthshire — vallées boisées, rivières à saumons. La route est fluide et agréable.</p>
+        </div>
+      </div>
+
+      <div class="drive-line">1h30 · A9</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">10h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Blair Castle <span class="castle-tag">château</span></h3>
+          <p class="stop-desc">Château blanc dans un parc avec des cerfs en liberté. Résidence des Ducs d'Atholl depuis le XIIIe siècle. Compter 1h30 de visite, intérieur très bien conservé.</p>
+          <div class="polaroid-wrap">
+            <div class="polaroid tilt-l">
+              <img src="https://images.unsplash.com/photo-1578240748485-ad93c9c30aea?q=80&w=1073&auto=format&fit=crop" style="width:300px;height:190px;object-fit:cover;display:block;" alt="Blair Castle">
+              <p class="polaroid-caption">Blair Castle &amp; les cerfs</p>
+            </div>
+          </div>
+          <div class="note">
+            <p class="note-text">Les cerfs Highland cattle se baladent souvent près de l'entrée — appareil photo prêt ! Réserver en ligne à l'avance.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">15 min · A9</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">13h00</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Pitlochry — déjeuner</h3>
+          <p class="stop-desc">Joli village du Perthshire avec son pont suspendu sur la Tummel et ses boutiques de tweed. Pause déjeuner agréable — Moulin Hotel pour un pub traditionnel.</p>
+          <div class="note">
+            <p class="note-text">Option : Blair Athol Distillery à 10 min de Pitlochry — visite et dégustation pour les amateurs de whisky.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-line">1h30 · A9 → M90</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">15h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot" style="background:var(--ink-faded);"></div></div>
+        </div>
+        <div class="stop-right">
+          <span class="sticker sticker-green">🏡 2 nuits</span>
+          <h3 class="stop-name">Édimbourg</h3>
+          <p class="stop-desc">Check-in, puis première balade dans la Old Town. Royal Mile, closes médiévales, premier pub écossais du séjour.</p>
+          <div class="note">
+            <p class="note-text">Le Café Royal (bar victorien splendide) ou The Albanach sur le Royal Mile pour le premier soir.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ J6 ══════════ -->
+<div class="page">
+  <div class="day-page">
+    <div class="day-stripe j6"></div>
+    <div class="day-header">
+      <div class="day-header-left">
+        <p class="day-label">Jour 6 · Mardi 28 Avril</p>
+        <h2 class="day-title-big">Édimbourg</h2>
+        <p class="day-route-line">Château · Royal Mile · Arthur's Seat</p>
+      </div>
+      <div class="day-drive-badge">
+        <span class="drive-time">0 km</span>
+        <span class="drive-label">tout à pied</span>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">9h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Château d'Édimbourg <span class="castle-tag">château</span></h3>
+          <p class="stop-desc">Sur son rocher volcanique depuis 3 000 ans. Les Honneurs d'Écosse (plus anciens joyaux de la Couronne d'Europe), la chapelle Sainte-Marguerite, la Grande Salle. Compter 2h.</p>
+          <div class="polaroid-wrap">
+            <div class="polaroid-row">
+              <div class="polaroid tilt-l">
+                <img src="https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?q=80&w=1170&auto=format&fit=crop" style="width:190px;height:140px;object-fit:cover;display:block;" alt="Edinburgh Castle">
+                <p class="polaroid-caption">Edinburgh Castle</p>
+              </div>
+              <div class="polaroid tilt-r">
+                <img src="https://www.loch-lomond-waterfront.co.uk/wp-content/uploads/2021/07/Edinburgh-Castle-3-960x1080.jpg" style="width:190px;height:140px;object-fit:cover;display:block;" alt="Vue remparts Edimbourg">
+                <p class="polaroid-caption">vue sur la ville</p>
+              </div>
+            </div>
+          </div>
+          <div class="note">
+            <p class="note-text">Arriver à l'ouverture pile ! Réserver en ligne (~£19). À 13h le canon tire depuis les remparts — très impressionnant.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sep">· · ·</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">12h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Royal Mile & closes médiévales</h3>
+          <p class="stop-desc">Descente à pied du château jusqu'à Holyrood. Explorer les closes — ruelles perpendiculaires qui plongent dans la vieille ville. Grassmarket pour déjeuner.</p>
+          <div class="note">
+            <p class="note-text">Mary King's Close : visite souterraine des ruelles du XVIIe s. À réserver. Greyfriars Kirkyard & Bobby juste à côté.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sep">· · ·</div>
+
+      <div class="stop">
+        <div class="stop-left">
+          <span class="stop-time">15h30</span>
+          <div class="stop-dot-wrap"><div class="stop-dot" style="background:var(--ink-faded);"></div></div>
+        </div>
+        <div class="stop-right">
+          <h3 class="stop-name">Arthur's Seat</h3>
+          <p class="stop-desc">Volcan éteint au cœur de la ville. 45 min de montée, dénivelé ~250m, vue à 360° sur Édimbourg et le Firth of Forth. Le meilleur panorama du voyage.</p>
+          <div class="note">
+            <p class="note-text">Si trop fatiguée : Calton Hill = 10 min à pied depuis le Royal Mile, vue presque aussi belle, beaucoup plus accessible.</p>
+          </div>
+          <div class="note" style="margin-top:0.8rem; border-left-color: var(--red-soft);">
+            <p class="note-text" style="color:var(--red);">✈ Vol 6h35 le 30 avril — nuit Premier Inn Airport le 29 au soir. Rendre la voiture SIXT à l'aéroport.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ BACK ══════════ -->
+<div class="page">
+  <div class="back-cover">
+    <p style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.3em; color:var(--ink-light); text-transform:uppercase;">Écosse · Avril 2026</p>
+    <div class="back-big">Slàinte<br>Mhath !</div>
+    <p class="back-sub">"À ta santé" en gaélique écossais</p>
+    <div style="width:40px; height:1px; background:var(--paper-darker); margin: 0 auto 1.5rem;"></div>
+    <p class="back-dots">Stirling · Glencoe · Castle Stalker · Eilean Donan<br>Skye · Inverness · Blair Castle · Édimbourg</p>
+  </div>
+  <div class="cover-top-strip" style="position:absolute; bottom:0; top:auto;"></div>
+</div>
+
+</body>
+</html>
